@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Language_Center_Management.Models.CourseSchedule>
+
+<div class="container">
+    <h2>Course Registration</h2>
+
+    <!-- Nút "Refresh" và "View Schedule" ở trên cùng -->
+    <div class="mb-3">
+        <a href="@Url.Action("Index", "Course")" class="btn btn-primary">Refresh</a>
+        <a href="@Url.Action("ViewSchedule", "Course")" class="btn btn-info">View Schedule</a>
+        <a href="@Url.Action("Index", "Grade")" class="btn btn-info">View Grades</a>
+    </div>
+
+    <!-- Thông báo từ TempData -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course name</th>
+                    <th>Language Name</th>
+                    <th>Starting Date</th>
+                    <th>Ending Date</th>
+                    <th>Register</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var schedule in Model)
+                {
+                    <tr>
+                        <td>@schedule.Course_ID</td>
+                        <td>@schedule.Course_name</td>
+                        <td>@schedule.Language_Name</td>
+                        <td>@schedule.Starting_Date</td>
+                        <td>@schedule.Ending_Date</td>
+                        <td>
+                            @if (ViewBag.RegisteredCourses != null && ViewBag.RegisteredCourses.Contains(schedule.Course_ID))
+                            {
+                                <button class="btn btn-secondary" disabled>Registered</button>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Register", "Course", new { id = schedule.Course_ID })" class="btn btn-success">Register</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">No available courses for registration.</div>
+    }
+</div>

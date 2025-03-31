@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 class="text-center my-4">Login</h2>
+
+<div class="container d-flex justify-content-center">
+    <div class="card p-4 shadow-sm" style="width: 350px;">
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Username:</label>
+                <input type="text" name="username" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password:</label>
+                <input type="password" name="password" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        @if (ViewBag.Message != null)
+        {
+            <p class="text-danger text-center mt-3">@ViewBag.Message</p>
+        }
+    </div>
+</div>
+

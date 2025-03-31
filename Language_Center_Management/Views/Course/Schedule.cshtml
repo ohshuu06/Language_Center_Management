@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Language_Center_Management.Models.CourseSchedule>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Registered Course Schedules</h2>
+
+    <div class="mb-3">
+        <a href="@Url.Action("Index", "Course")" class="btn btn-dark">Back</a>
+        <a href="@Url.Action("Index", "Grade")" class="btn btn-info">View Grades</a>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th>Course ID</th>
+                    <th>Starting Date.</th>
+                    <th>Ending Date</th>
+                    <th>Day of Week</th>
+                    <th>Starting Time</th>
+                    <th>Ending Time</th>
+                    <th>Room_No</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var schedule in Model)
+                {
+                    <tr class="text-center">
+                        <td>@schedule.Course_ID</td>
+                        <td>@schedule.Starting_Date.ToString("dd/MM/yyyy")</td>
+                        <td>@schedule.Ending_Date.ToString("dd/MM/yyyy")</td>
+                        <td>@schedule.DayOfWeek</td>
+                        <td>@schedule.Starting_Time</td>
+                        <td>@schedule.Ending_Time</td>
+                        <td>@schedule.Room_No</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">You have not registered for any courses.</div>
+    }
+</div>

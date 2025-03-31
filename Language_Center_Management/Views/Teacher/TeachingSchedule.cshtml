@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Language_Center_Management.Models.CourseSchedule>
+
+<div class="container">
+    <h2>Teaching Schedule</h2>
+    <div class="mt-3">
+        <a href="@Url.Action("GradeSchedule", "Teacher")" class="btn btn-primary">View Grades</a>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Starting Date</th>
+                    <th>Ending Date</th>
+                    <th>Day of Week</th>
+                    <th>Starting Time</th>
+                    <th>Ending Time</th>
+                    <th>Room_No</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var schedule in Model)
+                {
+                    <tr>
+                        <td>@schedule.Course_ID</td>
+                        <td>@schedule.Starting_Date.ToString("dd/MM/yyyy")</td>
+                        <td>@schedule.Ending_Date.ToString("dd/MM/yyyy")</td>
+                        <td>@schedule.DayOfWeek</td>
+                        <td>@schedule.Starting_Time</td>
+                        <td>@schedule.Ending_Time</td>
+                        <td>@schedule.Room_No</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">No teaching schedule available.</div>
+    }
+
+</div>
